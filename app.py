@@ -5,8 +5,8 @@ import altair as alt
 
 st.title("🔮 Customer Churn Prediction")
 
-# ✅ Load the model once at the start
-@st.cache(allow_output_mutation=True)
+# ✅ تحميل الموديل (باستخدام st.cache_resource بدلاً من st.cache)
+@st.cache_resource
 def load_model():
     with open("random_forest_model.pkl", "rb") as file:
         model = pickle.load(file)
@@ -14,7 +14,7 @@ def load_model():
 
 model = load_model()
 
-# User Inputs
+# 🖊️ إدخال بيانات المستخدم
 st.sidebar.header("📥 Customer Info")
 
 def get_input(label, options=["Yes", "No"]):
@@ -40,6 +40,7 @@ inputs = {
     "Internet_Service_No": get_input("Internet_Service_No (بدون خدمة إنترنت)", ["Yes", "No"])
 }
 
+# 🚀 التوقع
 if st.button("🔍 Predict"):
     try:
         input_df = pd.DataFrame([inputs])
