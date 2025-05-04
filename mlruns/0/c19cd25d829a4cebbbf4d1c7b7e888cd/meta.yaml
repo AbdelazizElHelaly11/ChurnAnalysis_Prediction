@@ -1,0 +1,15 @@
+artifact_uri: file:///D:/final%20project/mlruns/0/c19cd25d829a4cebbbf4d1c7b7e888cd/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: c19cd25d829a4cebbbf4d1c7b7e888cd
+run_name: mercurial-hawk-673
+run_uuid: c19cd25d829a4cebbbf4d1c7b7e888cd
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1745773421243
+status: 1
+tags: []
+user_id: NO.1

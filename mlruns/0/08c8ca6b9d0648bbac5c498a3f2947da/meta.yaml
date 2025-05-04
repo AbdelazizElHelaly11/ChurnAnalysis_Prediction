@@ -1,0 +1,15 @@
+artifact_uri: file:///D:/final%20project/mlruns/0/08c8ca6b9d0648bbac5c498a3f2947da/artifacts
+end_time: 1745857162257
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 08c8ca6b9d0648bbac5c498a3f2947da
+run_name: Churn_Prediction
+run_uuid: 08c8ca6b9d0648bbac5c498a3f2947da
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1745857162185
+status: 3
+tags: []
+user_id: NO.1
