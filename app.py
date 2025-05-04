@@ -1,12 +1,18 @@
 import streamlit as st
 import pandas as pd
-import requests
+import pickle
 import altair as alt
 
 st.title("🔮 Customer Churn Prediction")
 
-# API Endpoint
-API_URL = "http://127.0.0.1:8000/predict/"
+# ✅ Load the model once at the start
+@st.cache(allow_output_mutation=True)
+def load_model():
+    with open("random_forest_model.pkl", "rb") as file:
+        model = pickle.load(file)
+    return model
+
+model = load_model()
 
 # User Inputs
 st.sidebar.header("📥 Customer Info")
@@ -34,25 +40,23 @@ inputs = {
     "Internet_Service_No": get_input("Internet_Service_No (بدون خدمة إنترنت)", ["Yes", "No"])
 }
 
-
 if st.button("🔍 Predict"):
     try:
-        res = requests.post(API_URL, json=inputs).json()
-        pred = res["prediction"]
-        churn = res["probability_of_churn"]
-        stay = 1 - churn
+        input_df = pd.DataFrame([inputs])
+        prediction = model.predict(input_df)[0]
+        proba = model.predict_proba(input_df)[0][1]
+        stay = 1 - proba
 
         st.subheader(f"Stay Probability: {stay:.2%}")
         
-        # ✅ هنا التعديل
-        if pred == 0:
+        if prediction == 0:
             st.success("✅ Will Stay")
         else:
             st.error("⚠️ Will Churn")
 
         chart = alt.Chart(pd.DataFrame({
             "Status": ["Churn", "Stay"],
-            "Probability": [churn, stay]
+            "Probability": [proba, stay]
         })).mark_bar().encode(
             x="Status", y="Probability", color="Status"
         )
